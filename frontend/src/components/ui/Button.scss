@@ -1,63 +1,64 @@
 @use "@/styles/variables" as *;
 
 .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    gap: $btn-gap;
-    padding: $btn-padding-y $btn-padding-x;
-    border-radius: $r-lg;
-    border: 1px solid transparent;
-    font-size: $btn-font-size;
-    font-weight: $btn-font-weight;
-    color: $fg;
-    cursor: pointer;
-    transition: $ease;
-    background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  gap: $btn-gap;
+  padding: $btn-padding-y $btn-padding-x;
+  border-radius: $r-lg;
+  border: 1px solid transparent;
+  font-size: $btn-font-size;
+  font-weight: $btn-font-weight;
+  color: $fg;
+  cursor: pointer;
+  transition: $ease;
+  background: transparent;
+
+  img {
+    width: $btn-icon-size;
+    transition: transform $ease;
+  }
+
+  &:hover {
+    transform: translateY($btn-move);
 
     img {
-        width: $btn-icon-size;
-        transition: transform $ease;
+      transform: translateY($btn-icon-move);
     }
+  }
+
+  &.intro {
+    width: 11rem;
+    height: 4rem;
+    background: $red;
+    clip-path: polygon(6% 35%, 50% 9%, 94% 35%, 94% 70%, 50% 93%, 6% 70%);
 
     &:hover {
-
-        transform: translateX($btn-icon-move);
-
-        img {
-            transform: translateX($btn-icon-move);
-        }
+      background-color: $red-2;
+      box-shadow: $shadow-intro;
     }
-
-    &.intro {
-        width: 11rem;
-        height: 4rem;
-        background: red;
-        clip-path: polygon(
-            6% 35%, 
-            50% 9%, 
-            94% 35%, 
-            94% 70%, 
-            50% 93%, 
-            6% 70%);
-
-        &:hover {
-            background: linear-gradient(-90deg,
-                    $purple,
-                    $purple-2 );
-            box-shadow: $shadow-intro;
-
-        }
+  }
+  &.primary {
+    background: linear-gradient(90deg, $red, $red-2);
+    width: 100%;
+    &:hover {
+      transform: translateY(0);
+      box-shadow: $shadow-sm;
     }
-    &.primary {
-        background: linear-gradient(90deg,
-      $purple,
-      $purple-2 );
-      width: 100%;
-      &:hover {
-        transform: translateY(0);
-        box-shadow: $shadow-sm;
-      }
+  }
+  &.delete,
+    &.cancel {
+        background-color: $error;
+    }
+    &.save {
+        background-color: $success;
+    }
+    &.back.bl {
+        color:$gray-900
+    }
+    &.edit {
+        background-color: $warning;
     }
 }
