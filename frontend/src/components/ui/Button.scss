@@ -28,13 +28,13 @@
       transform: translateY($btn-icon-move);
     }
   }
-
+  
   &.intro {
     width: 11rem;
     height: 4rem;
     background: $red;
     clip-path: polygon(6% 35%, 50% 9%, 94% 35%, 94% 70%, 50% 93%, 6% 70%);
-
+    
     &:hover {
       background-color: $red-2;
       box-shadow: $shadow-intro;
@@ -49,16 +49,28 @@
     }
   }
   &.delete,
-    &.cancel {
-        background-color: $error;
+  &.cancel {
+    background-color: $error;
+  }
+  &.save {
+    background-color: $success;
+  }
+  &.back {
+    &:hover {
+      transform: translateX(-$btn-move);
+      box-shadow: $shadow-sm;
+
+      img {
+        transform: translateY(0);
+      }
     }
-    &.save {
-        background-color: $success;
-    }
-    &.back.bl {
-        color:$gray-900
-    }
-    &.edit {
-        background-color: $warning;
-    }
+
+  }
+
+  &.back.bl {
+    color: $gray-900;
+  }
+  &.edit {
+    background-color: $warning;
+  }
 }
