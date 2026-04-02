@@ -1,0 +1,23 @@
+@use "@/styles/variables" as *;
+header {
+  background: linear-gradient(180deg, $gray-300 0%, $gray-400 100%);
+  .inner {
+    max-width: $container-lg;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $space-lg 0;
+
+    h1 {
+      width: 136px;
+    }
+    .right {
+      display: flex;
+      align-items: center;
+
+      ul {
+        display: flex;
+      }
+    }
+  }
+}

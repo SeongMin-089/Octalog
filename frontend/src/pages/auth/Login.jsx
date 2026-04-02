@@ -99,7 +99,7 @@ const Login = () => {
               />
             </div>
             <div className="auth-btn-wrap">
-              <Button text="로그인" type="submit" className="primary" />
+              <Button text="로그인" type="submit" className="auth" />
             </div>
           </form>
           {error && <p className='error-text'> {error}</p>}

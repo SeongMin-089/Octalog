@@ -2,6 +2,7 @@
 
 .auth {
     height: 100vh;
+    background: url(../../../public/images/auth-bg.png);
 
     .inner {
         display: flex;
@@ -30,11 +31,14 @@
 
             .auth-btn-wrap {
                 margin-top: $space-lg;
+                display: flex;
+                justify-content: center;
             }
         }
 
         .auth-now {
             display: flex;
+            width: 100%;
             align-items: center;
             justify-content: flex-end;
             gap: $space-md;

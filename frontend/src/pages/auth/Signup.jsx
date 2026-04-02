@@ -138,7 +138,7 @@ const Signup = () => {
             <Button 
             text={isLoading? "가입 중...":"회원가입"} 
             type="submit" 
-            className="primary" />
+            className="auth" />
           </div>
         </form>
         <div className="auth-now">
