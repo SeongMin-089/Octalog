@@ -1,5 +1,9 @@
 @use "@/styles/variables" as *;
 
+.post-header {
+    background: transparent;
+  }
+
 .tags {
     display: flex;
     gap: $space-sm;

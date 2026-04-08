@@ -1,6 +1,7 @@
 @use "@/styles/variables" as *;
 header {
   background: linear-gradient(180deg, $gray-300 0%, $gray-400 100%);
+  
   .inner {
     max-width: $container-lg;
     display: flex;
