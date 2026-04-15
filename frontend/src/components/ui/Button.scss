@@ -17,12 +17,13 @@
   background: transparent;
 
   img {
-    width: $btn-icon-size;
+    width: $btn-icon-size-2;
     transition: transform $ease;
   }
 
   &:hover {
     transform: translateY($btn-move);
+    color: $red;
 
     img {
       transform: translateY($btn-icon-move);
