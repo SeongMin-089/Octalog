@@ -57,7 +57,7 @@ const PostDetail = () => {
           showButton
           onClick={handleGoBack}
           buttonText="뒤로가기"
-          buttonClass="back bl"
+          buttonClass="primary"
         />
         <div className="post-main">
           <article className='post-card'>

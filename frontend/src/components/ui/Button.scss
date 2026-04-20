@@ -23,8 +23,7 @@
 
   &:hover {
     transform: translateY($btn-move);
-    color: $red;
-
+    
     img {
       transform: translateY($btn-icon-move);
     }
@@ -47,6 +46,12 @@
     &:hover {
       transform: translateY(0);
       box-shadow: $shadow-sm;
+    }
+  }
+  &.nav {
+    &:hover {
+      color: $red;
+
     }
   }
   &.auth {
