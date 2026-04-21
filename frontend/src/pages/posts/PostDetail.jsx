@@ -5,7 +5,6 @@ import PostTag from '@/components/posts/PostTag'
 import './PostPagesAll.scss'
 import { useNavigate, useParams } from 'react-router-dom'
 import PostHeader from '@/components/posts/PostHeader'
-
 const PostDetail = () => {
 
   const { id } = useParams()
@@ -58,7 +57,7 @@ const PostDetail = () => {
           showButton
           onClick={handleGoBack}
           buttonText="뒤로가기"
-          buttonClass="back bl"
+          buttonClass="primary"
         />
         <div className="post-main">
           <article className='post-card'>
@@ -75,9 +74,10 @@ const PostDetail = () => {
               </p>
 
               <div className="tags">
-                <PostTag tag="tag1" />
-                <PostTag tag="tag2" />
-                <PostTag tag="tag3" />
+                {(post.tags||[]).map((tag,i)=>(
+
+                <PostTag tag={tag} key={i} />
+                ))}
               </div>
             </div>
             <div className="img-wrap">

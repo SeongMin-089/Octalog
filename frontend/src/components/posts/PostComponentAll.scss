@@ -16,7 +16,6 @@
         background-color: $gray-200;
         padding: $space-sm $space-md;
         gap: $space-sm;
-
         border-radius: $r-lg;
         align-items: center;
 
@@ -55,7 +54,7 @@
 }
 
 .post-card article {
-    border: 1px solid $gray-100;
+    border: 1px solid $gray-200;
     display: flex;
     padding: $space-lg;
     border-radius: $r-md;
@@ -64,7 +63,7 @@
     justify-content: space-between;
 
     &:hover {
-        background-color: $purple-3;
+        background-color: $red-3;
     }
 
     .post-card-body {
