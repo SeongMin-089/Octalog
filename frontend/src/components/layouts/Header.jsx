@@ -36,7 +36,7 @@ const Header = () => {
     }
   }
   return (
-    <header>
+    <header className='header'>
       <div className="inner">
         <h1>
           <Link to="/app">

@@ -1,5 +1,5 @@
 @use "@/styles/variables" as *;
-header {
+.header {
   background: linear-gradient(180deg, $gray-300 0%, $gray-400 100%);
   
   .inner {
