@@ -42,11 +42,23 @@
   }
   &.primary {
     background: linear-gradient(90deg, $red, $red-2);
-    width: 100%;
+    clip-path: polygon(0% 40%, 50% 20%, 100% 40%, 100% 65%, 50% 80%, 0% 65%);
+    // width: 40%;
+    height: 5rem;
     &:hover {
-      transform: translateY(0);
+      background: linear-gradient(90deg, $red-2, $red);
+      transform: translateY($btn-move);
       box-shadow: $shadow-sm;
+      
     }
+
+
+    // background: linear-gradient(90deg, $red, $red-2);
+    // width: 100%;
+    // &:hover {
+    //   transform: translateY(0);
+    //   box-shadow: $shadow-sm;
+    // }
   }
   &.nav {
     &:hover {
@@ -85,6 +97,9 @@
 
   &.back.bl {
     color: $gray-900;
+    &:hover {
+      box-shadow: none;
+    }
   }
   &.edit {
     background-color: $warning;
