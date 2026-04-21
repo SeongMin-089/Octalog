@@ -1,18 +1,18 @@
 const TAG_COLORS = [
-  '#ffefef', // red-100
-  '#fff2e0', // orange-100
-  '#fcf9dd', // yellow-100
-  '#f7ffe6', // lime-100
-  '#d1fae5', // green-100
-  '#e3fafc', // cyan-100
-  '#ecf8ff', // sky-100
-  '#dbeafe', // blue-100
-  '#e0e7ff', // indigo-100
-  '#ede9fe', // violet-100
-  '#f5f3ff', // purple-50 느낌
-  '#fae8ff', // fuchsia-100
-  '#fdedf6', // pink-100
-  '#fff1f2'  // rose-100
+  '#f9fafb', // gray-50
+  '#f3f4f6', // gray-100
+  '#e5e7eb', // gray-200
+  '#fef2f2', // red-50
+  '#fee2e2', // red-100
+  '#fecaca', // red-200
+  '#fff1f2', // rose-50
+  '#ffe4e6', // rose-100
+  '#fde2e2', // soft red
+  '#f8fafc', // soft gray
+  '#f1f5f9', // slate-100
+  '#fdf2f8', // pink-50 느낌
+  '#fafafa', // neutral
+  '#f5f5f5'  // gray-100 느낌
 ]
 
 function hashString(s){
