@@ -10,15 +10,15 @@ const Header = () => {
 
   const menus = [
     {
-      name: '내 메모',
+      name: 'FIGHTER',
       link: '/app/posts/all'
     },
     {
-      name: '내 프로필',
+      name: 'MY PROFILE',
       link: '/app/profile'
     },
     {
-      name: '설정',
+      name: 'SETTING',
       link: '/app/setting'
     }
   ]

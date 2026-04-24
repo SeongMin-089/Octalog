@@ -14,7 +14,7 @@ const PostCreate = () => {
 
   const navigate = useNavigate()
 
-  const [category, setCategory] = useState('DAILY')
+  const [category, setCategory] = useState('CHAMPION')
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
   const [tags, setTags] = useState([])
@@ -115,11 +115,11 @@ const PostCreate = () => {
   const handleSave = async (e) => {
     e.preventDefault()
     if (!title.trim()) {
-      alert('제목을 입력하세요')
+      alert('이름을 입력하세요')
       return
     }
     if (!content.trim()) {
-      alert('내용을 입력하세요')
+      alert('설명을 입력하세요')
       return
     }
 
@@ -180,7 +180,7 @@ const PostCreate = () => {
               name="title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              placeholder="제목을 입력하세요"
+              placeholder="이름을 입력하세요"
             />
             <div className="post-tag-box">
 
@@ -196,7 +196,7 @@ const PostCreate = () => {
                 value={tagInput}
                 onKeyDown={handleKenEnter}
                 onChange={(e)=>setTagInput(e.target.value)}
-                type="text" className='post-tag-input' placeholder='tag를 자유롭게 입력하세요' />
+                type="text" className='post-tag-input' placeholder='tag 입력(weight, style 등)' />
                 <Button 
                 type="button" 
                 text="+ 태그 추가" 
@@ -205,13 +205,13 @@ const PostCreate = () => {
               </div>
             </div>
             <div className="post-field">
-              <label className='post-label'>내용</label>
+              <label className='post-label'>선수 설명</label>
               <div className="post-input-wrap">
                 <textarea
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
 
-                  className='post-textarea' placeholder='내용을 자유롭게 입력하세요' />
+                  className='post-textarea' placeholder='선수에 대해 설명해주세요' />
               </div>
             </div>
             <div className="post-upload-card">
@@ -233,7 +233,7 @@ const PostCreate = () => {
 
                 )}
 
-                <p className='post-upload-title'>이미지를 업로드 하세요</p>
+                <p className='post-upload-title'>선수 사진을 업로드 하세요</p>
                 <span className="post-upload-desc">
                   클릭하거나 파일을 드래그 하여 업로드
                 </span>

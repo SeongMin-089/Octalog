@@ -230,7 +230,7 @@ const PostEdit = () => {
               name="title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              placeholder="제목을 입력하세요"
+              placeholder="이름을 입력하세요"
             />
             <div className="post-tag-box">
 
@@ -245,7 +245,7 @@ const PostEdit = () => {
                 onKeyDown={handleKenEnter}
                 onChange={(e)=>setTagInput(e.target.value)}
                 className='post-tag-input' 
-                placeholder='tag를 자유롭게 입력하세요' />
+                placeholder='tag 입력(weight, style 등)' />
                 <Button 
                 type="button" 
                 onClick={handleAddTag}
@@ -254,13 +254,13 @@ const PostEdit = () => {
               </div>
             </div>
             <div className="post-field">
-              <label className='post-label'>내용</label>
+              <label className='post-label'>선수 설명</label>
               <div className="post-input-wrap">
                 <textarea
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
 
-                  className='post-textarea' placeholder='내용을 자유롭게 입력하세요' />
+                  className='post-textarea' placeholder='선수에 대해 설명해주세요' />
               </div>
             </div>
             <div className="post-upload-card">
@@ -281,7 +281,7 @@ const PostEdit = () => {
 
                 )}
 
-                <p className='post-upload-title'>이미지를 업로드 하세요</p>
+                <p className='post-upload-title'>선수 사진을 업로드 하세요</p>
                 <span className="post-upload-desc">
                   클릭하거나 파일을 드래그 하여 업로드
                 </span>
