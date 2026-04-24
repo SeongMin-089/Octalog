@@ -2,11 +2,12 @@ package picstory.backend.domain;
 
 public enum PostCategory {
 
-    DAILY("일상"),
-    HOBBY("취미"),
-    TRAVEL("여행"),
-    WORK("업무"),
-    STUDY("공부"),
+    CHAMPION("챔피언"),
+    CONTENDER("컨텐더"),
+    RANKER("랭커"),
+    UNRANKER("언랭커"),
+    PROSPECT("유망주"),
+    LEGEND("레전드"),
     ETC("기타");
     private final String label;
 

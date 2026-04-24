@@ -47,7 +47,7 @@ const PostAll = () => {
 
         setPosts(mappedPosts)
       } catch (error) {
-        setFetchError(error?.response?.data?.message || error.message || '게시글 조회 실패')
+        setFetchError(error?.response?.data?.message || error.message || 'FIGHTER 조회 실패')
         setPosts([])
       }
 
@@ -83,7 +83,7 @@ const PostAll = () => {
 
 
   const handleCreatePost = () => {
-    console.log('새 메모 작성')
+    console.log('새로운 FIGHTER 작성')
     navigate('/app/posts/new')
   }
 
@@ -92,14 +92,14 @@ const PostAll = () => {
       <div className="inner">
         <PostHeader
           onClick={handleCreatePost}
-          title='전체 게시글 보기'
+          title='전체 FIGHTER'
           showButton
-          buttonText="새 게시글 쓰기"
+          buttonText="새로운 FIGHTER 기록"
           buttonClass="primary"
         />
         <div className="input-post">
           <Input
-            placeholder="게시글 제목 또는 내용을 검색하세요"
+            placeholder="기록된 선수를 검색하세요!"
             value={searchKeyword}
             onChange={(e) => setSearchKeyword(e.target.value)}
           />
@@ -111,7 +111,7 @@ const PostAll = () => {
             selectedTag={selectedTag}
             onChangeTag={setSelectedTag}
           />
-          <Button text="전체 게시글 보기" className="wh" />
+          <Button text="전체 FIGHTER 보기" className="wh" />
         </div>
         <PostList posts={currentPosts} />
 

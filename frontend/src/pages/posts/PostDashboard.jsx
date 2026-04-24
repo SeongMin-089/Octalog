@@ -42,7 +42,7 @@ const PostDashboard = () => {
 
                 setPosts(mappedPosts)
             } catch (error) {
-                setFetchError(error?.response?.data?.message || error.message || '게시글 조회 실패')
+                setFetchError(error?.response?.data?.message || error.message || 'FIGHTER 조회 실패')
                 setPosts([])
             }
 
@@ -55,7 +55,7 @@ const PostDashboard = () => {
 
     const filteredPosts = useFilteredPosts(posts,selectedTag,searchKeyword)
     const handleCreatePost = () => {
-        console.log('새 메모 작성')
+        console.log('새 FIGHTER 작성')
         navigate('/app/posts/new')
     }
     return (
@@ -63,14 +63,14 @@ const PostDashboard = () => {
             <div className="inner">
                 <PostHeader
                     onClick={handleCreatePost}
-                    title='게시글을 작성하세요'
+                    title='당신의 FIGHTER를 기록하세요'
                     showButton
-                    buttonText="작성하기"
+                    buttonText="FIGHTER 기록"
                     buttonClass="primary"
                 />
                 <div className="input-post">
                     <Input
-                        placeholder="게시글 제목 또는 내용을 검색하세요"
+                        placeholder="기록된 선수를 검색하세요!"
                         value={searchKeyword}
                         onChange={(e) => setSearchKeyword(e.target.value)}
                     />
@@ -82,7 +82,7 @@ const PostDashboard = () => {
                         selectedTag={selectedTag}
                         onChangeTag={setSelectedTag}
                     />
-                    <Button text="전체 게시글 보기" className="wh" />
+                    <Button text="전체 FIGHTER 보기" className="wh" />
                 </div>
                 <PostList posts={filteredPosts.slice(0,3)} />
             </div>
