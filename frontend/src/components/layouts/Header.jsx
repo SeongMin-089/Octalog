@@ -18,7 +18,7 @@ const Header = () => {
       link: '/app/profile'
     },
     {
-      name: 'SETTING',
+      name: 'MY PICKS',
       link: '/app/setting'
     }
   ]

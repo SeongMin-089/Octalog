@@ -20,7 +20,7 @@ const Setting = () => {
   }, [])
 
   return (
-    <section className="setting-page">
+    <section className="page">
       <div className="inner">
         <h2>MY PICKS</h2>
 
