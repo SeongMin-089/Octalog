@@ -8,7 +8,7 @@ import { CATEGORY_OPTIONS } from '@/constants/category'
 import PostTag from '@/components/posts/PostTag'
 import { createPost } from '@/api/post.api'
 import { uploadImage } from '@/api/file.api'
-import { createTag,deleteTag, getMyTags } from '@/api/tag.api'
+// import { createTag,deleteTag, getMyTags } from '@/api/tag.api'
 const PostCreate = () => {
 
 
@@ -24,76 +24,101 @@ const PostCreate = () => {
   const [isSaving, setIsSaving] = useState(false)
   const [imageUrl, setImageUrl] = useState(null)
 
-  const loadMyTags = async()=>{
-    const res = await getMyTags()
-    const list = Array.isArray(res)? res :res?.data?? []
+  // const loadMyTags = async()=>{
+  //   const res = await getMyTags()
+  //   const list = Array.isArray(res)? res :res?.data?? []
 
-    setTags(
-      list.map((t)=>({
-        id:t.id,
-        label:typeof t ==='string'? t: t.label?? t.name
-      }))
-    )
+  //   setTags(
+  //     list.map((t)=>({
+  //       id:t.id,
+  //       label:typeof t ==='string'? t: t.label?? t.name
+  //     }))
+  //   )
 
 
-    // console.log(res)
+  //   // console.log(res)
+  // }
+
+  // useEffect(()=>{
+  //   loadMyTags().catch((e)=>{
+  //     console.error(e)
+  //   })
+  // },[])
+
+  const handleAddTag = () => {
+  const next = tagInput.trim()
+
+  if (!next) return
+
+  if (tags.some((t) => t.label === next)) {
+    setTagInput('')
+    return
   }
 
-  useEffect(()=>{
-    loadMyTags().catch((e)=>{
-      console.error(e)
-    })
-  },[])
+  setTags((prev) => [
+    ...prev,
+    {
+      id: Date.now(),
+      label: next,
+    },
+  ])
 
-  const handleAddTag =async()=>{
-    const next = tagInput.trim()
+  setTagInput('')
+}
+  // const handleAddTag =async()=>{
+  //   const next = tagInput.trim()
 
-    if(!next) return
+  //   if(!next) return
 
-    if(tags.some((t)=>t.label ==next)){
-      setTagInput('')
-      return
-    }
-    try {
-      setIsAddingTag(true)
+  //   if(tags.some((t)=>t.label ==next)){
+  //     setTagInput('')
+  //     return
+  //   }
+  //   try {
+  //     setIsAddingTag(true)
 
-      const created = await createTag(next)
+  //     const created = await createTag(next)
 
-      setTags((prev)=>{
-        if(prev.some((t)=>t.id===created.id || t.label ===created.label)){
-          return prev
-        }
-        return [...prev,{
-          id:created.id,
-          label:created.label
-        }]
-      })
-      setTagInput('')
-    } catch (error) {
-      console.error(error)
-      const message = error?.response?.data?.message || '태그 추가 실패'
-      alert(message)
-    }finally{
-      setIsAddingTag(false)
-    }
+  //     setTags((prev)=>{
+  //       if(prev.some((t)=>t.id===created.id || t.label ===created.label)){
+  //         return prev
+  //       }
+  //       return [...prev,{
+  //         id:created.id,
+  //         label:created.label
+  //       }]
+  //     })
+  //     setTagInput('')
+  //   } catch (error) {
+  //     console.error(error)
+  //     const message = error?.response?.data?.message || '태그 추가 실패'
+  //     alert(message)
+  //   }finally{
+  //     setIsAddingTag(false)
+  //   }
 
-  }
+  // }
   const handleKenEnter =(e)=>{
     if(e.key==='Enter'){
       e.preventDefault()
       handleAddTag()
     }
   }
-  const handleRemoveTag = async(tag)=>{
-    try {
-      await deleteTag(tag.id)
-      setTags((prev)=>prev.filter((t)=>t.id!==tag.id))
-    } catch (error) {
-       console.error(error)
-      const message = error?.response?.data?.message || '태그 삭제 실패'
-      alert(message)
-    }
-  }
+
+  const handleRemoveTag = (tag) => {
+  setTags((prev) => prev.filter((t) => t.id !== tag.id))
+}
+
+  // const handleRemoveTag = async(tag)=>{
+  //   try {
+  //     await deleteTag(tag.id)
+  //     setTags((prev)=>prev.filter((t)=>t.id!==tag.id))
+  //   } catch (error) {
+  //      console.error(error)
+  //     const message = error?.response?.data?.message || '태그 삭제 실패'
+  //     alert(message)
+  //   }
+  // }
 
   const handleUploadImage = async (e) => {
     const file = e.target.files?.[0]
