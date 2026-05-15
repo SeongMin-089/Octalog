@@ -1,44 +1,49 @@
-import PostHeader from '@/components/posts/PostHeader'
-import PostList from '@/components/posts/PostList'
-import TagFilterBar from '@/components/posts/TagFilterBar'
-import Button from '@/components/ui/Button'
-import Input from '@/components/ui/Input'
-import { useState, useEffect } from 'react'
-import './PostPagesAll.scss'
-import { getPosts } from '@/api/post.api'
-import { useNavigate } from 'react-router-dom'
-import useFilteredPosts from '../../hooks/useFilteredPosts'
+import PostHeader from "@/components/posts/PostHeader"
+import PostList from "@/components/posts/PostList"
+import TagFilterBar from "@/components/posts/TagFilterBar"
+import Button from "@/components/ui/Button"
+import Input from "@/components/ui/Input"
+import { useState, useEffect } from "react"
+import "./PostPagesAll.scss"
+import { getPosts } from "@/api/post.api"
+import { useNavigate } from "react-router-dom"
+import useFilteredPosts from "../../hooks/useFilteredPosts"
 const PostDashboard = () => {
+  const [selectedTag, setSelectedTag] = useState("전체")
+  const [searchKeyword, setSearchKeyword] = useState("")
+  const [tags, setTags] = useState(["전체"])
 
-    const [selectedTag, setSelectedTag] = useState('전체')
-    const [searchKeyword, setSearchKeyword] = useState('')
-    const [tags, setTags] = useState(['전체'])
+  const [posts, setPosts] = useState([])
+  const navigate = useNavigate()
+  const [fetchError, setFetchError] = useState("")
 
-    const [posts, setPosts] = useState([])
-    const navigate = useNavigate()
-    const [fetchError, setFetchError] = useState('')
+  useEffect(() => {
+    setFetchError("")
+    const fetchPosts = async () => {
+      try {
+        const response = await getPosts()
 
-    useEffect(() => {
-        setFetchError('')
-        const fetchPosts = async () => {
-            try {
-                const response = await getPosts()
+        console.log(response)
+        const rawPosts = Array.isArray(response)
+          ? response
+          : Array.isArray(response?.data)
+            ? response.data
+            : []
 
-                console.log(response)
-                const rawPosts = Array.isArray(response)
-                    ? response
-                    : Array.isArray(response?.data)
-                        ? response.data
-                        : []
+        const mappedPosts = (rawPosts || []).map((post) => ({
+          id: post.id,
+          category: post.category,
+          title: post.title,
+          content: post.content,
+          tags: post.tags || [],
+          thumbnail: post.imageUrl || "",
+        }))
 
-                const mappedPosts = (rawPosts || []).map((post) => ({
-                    id: post.id,
-                    category: post.category,
-                    title: post.title,
-                    content: post.content,
-                    tags: post.tags || [],
-                    thumbnail: post.imageUrl || ''
-                }))
+        setPosts(mappedPosts)
+        const uniqueTags = [
+          "전체",
+          ...new Set(mappedPosts.flatMap((post) => post.tags || [])),
+        ]
 
                 setPosts(mappedPosts)
             } catch (error) {
