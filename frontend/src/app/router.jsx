@@ -13,6 +13,7 @@ import PostCreate from "../pages/posts/PostCreate"
 import PostDetail from "../pages/posts/PostDetail"
 import Setting from "../pages/setting/Setting"
 import Profile from "../pages/profile/Profile"
+import KakaoCallback from "../pages/auth/KakaoCallback"
 export const router = createBrowserRouter([
   {
     // 공개영역

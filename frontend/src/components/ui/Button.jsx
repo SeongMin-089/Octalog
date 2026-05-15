@@ -3,6 +3,7 @@ import './Button.scss'
 const Button = ({
   type="button",
   text,
+  children,
   className,
   onClick,
   backico = '',
@@ -23,9 +24,12 @@ const Button = ({
         backIconSrc && <img src={backIconSrc} />
       }
       {text}
+
+      {children}
+
       {icons && <img src='/images/arrow.svg' />}
     </button>
-  )
+  ) 
 }
 
 export default Button
