@@ -18,11 +18,7 @@ const Header = () => {
       link: '/app/profile'
     },
     {
-<<<<<<< HEAD
-      name: 'SETTING',
-=======
       name: 'MY PICKS',
->>>>>>> favorite-try
       link: '/app/setting'
     }
   ]
