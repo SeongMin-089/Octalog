@@ -9,6 +9,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Configuration
@@ -17,21 +18,20 @@ public class SecurityConfig {
     @Value("${cors.allowed-origins}")
     private String allowedOrigins;
 
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                                .requestMatchers("/members","/members/**").permitAll()
-                                .requestMatchers("/auth/**").permitAll()
-                                .requestMatchers("/api/auth/kakao", "/api/auth/kakao/callback").permitAll()
-                                .requestMatchers("/api/auth/kakao/**").permitAll()
-//                        .anyRequest().authenticated()
-                                .anyRequest().permitAll()
+                        .requestMatchers("/members", "/members/**").permitAll()
+                        .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/api/auth/kakao", "/api/auth/kakao/callback").permitAll()
+                        .requestMatchers("/api/auth/kakao/**").permitAll()
+                        // .anyRequest().authenticated()
+                        .anyRequest().permitAll()
                 )
-                .formLogin(form->form.disable())
+                .formLogin(form -> form.disable())
                 .httpBasic(basic -> basic.disable());
 
         return http.build();
@@ -43,16 +43,19 @@ public class SecurityConfig {
 
         config.setAllowCredentials(true);
 
-        config.setAllowedOrigins(List.of(allowedOrigins));
+        List<String> origins = Arrays.stream(allowedOrigins.split(","))
+                .map(String::trim)
+                .filter(s -> !s.isEmpty())
+                .toList();
 
-        config.setAllowedMethods(List.of("GET","POST","PUT","PATCH","DELETE","OPTIONS"));
+        config.setAllowedOrigins(origins);
 
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**",config);
+        source.registerCorsConfiguration("/**", config);
 
         return source;
     }
-
 }
