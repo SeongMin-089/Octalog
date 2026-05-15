@@ -77,11 +77,11 @@ const PostDashboard = () => {
                 </div>
                 <div className="tags-wrapper">
 
-                    <TagFilterBar
+                    {/* <TagFilterBar
                         tags={tags}
                         selectedTag={selectedTag}
                         onChangeTag={setSelectedTag}
-                    />
+                    /> */}
                     <Button text="전체 FIGHTER 보기" className="wh" />
                 </div>
                 <PostList posts={filteredPosts.slice(0,3)} />
