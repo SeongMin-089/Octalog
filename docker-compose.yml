@@ -44,6 +44,13 @@ services:
       AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
       AWS_REGION: ${AWS_REGION:-ap-northeast-2}
       AWS_S3_BUCKET: ${AWS_S3_BUCKET:-picstory2}
+
+      KAKAO_CLIENT_ID: ${KAKAO_CLIENT_ID}
+      KAKAO_CLIENT_SECRET: ${KAKAO_CLIENT_SECRET}
+      KAKAO_REDIRECT_URI: ${KAKAO_REDIRECT_URI}
+      KAKAO_TOKEN_URI: ${KAKAO_TOKEN_URI}
+      KAKAO_USER_INFO_URI: ${KAKAO_USER_INFO_URI}
+
     ports:
       - "8080:8080"
     volumes:
@@ -69,6 +76,7 @@ services:
     environment:
       CHOKIDAR_USEPOLLING: "true"
       WATCHPACK_POLLING: "true"
+      VITE_API_URL: http://localhost:8080
     ports:
       - "5173:5173"
     volumes:
