@@ -1,30 +1,29 @@
-import PostHeader from '@/components/posts/PostHeader'
-import PostList from '@/components/posts/PostList'
-import TagFilterBar from '@/components/posts/TagFilterBar'
-import Button from '@/components/ui/Button'
-import Input from '@/components/ui/Input'
-import { useState, useEffect } from 'react'
-import './PostPagesAll.scss'
-import { getPosts } from '@/api/post.api'
-import { useNavigate } from 'react-router-dom'
-import useFilteredPosts from '../../hooks/useFilteredPosts'
+import PostHeader from "@/components/posts/PostHeader"
+import PostList from "@/components/posts/PostList"
+import TagFilterBar from "@/components/posts/TagFilterBar"
+import Button from "@/components/ui/Button"
+import Input from "@/components/ui/Input"
+import EmptyFighters from "@/components/posts/EmptyFighters"
+import { useState, useEffect } from "react"
+import "./PostPagesAll.scss"
+import { getPosts } from "@/api/post.api"
+import { useNavigate } from "react-router-dom"
+import useFilteredPosts from "../../hooks/useFilteredPosts"
 
 const PostAll = () => {
-
-  const [selectedTag, setSelectedTag] = useState('전체')
-  const [searchKeyword, setSearchKeyword] = useState('')
-  const [tags, setTags] = useState(['전체'])
+  const [selectedTag, setSelectedTag] = useState("전체")
+  const [searchKeyword, setSearchKeyword] = useState("")
+  const [tags, setTags] = useState(["전체"])
 
   const [posts, setPosts] = useState([])
-  const [fetchError, setFetchError] = useState('')
+  const [fetchError, setFetchError] = useState("")
   const navigate = useNavigate()
 
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 3
 
-
   useEffect(() => {
-    setFetchError('')
+    setFetchError("")
     const fetchPosts = async () => {
       try {
         const response = await getPosts()
@@ -42,15 +41,18 @@ const PostAll = () => {
           title: post.title,
           content: post.content,
           tags: post.tags || [],
-          thumbnail: post.imageUrl || ''
+          thumbnail: post.imageUrl || "",
         }))
 
         setPosts(mappedPosts)
       } catch (error) {
-        setFetchError(error?.response?.data?.message || error.message || 'FIGHTER 조회 실패')
+        setFetchError(
+          error?.response?.data?.message ||
+            error.message ||
+            "FIGHTER 조회 실패",
+        )
         setPosts([])
       }
-
     }
     fetchPosts()
   }, [])
@@ -61,38 +63,36 @@ const PostAll = () => {
     setCurrentPage(1)
   }, [selectedTag, searchKeyword])
 
-  const totalPages = Math.ceil(filteredPosts.length/ itemsPerPage)
-  const startIndex =(currentPage -1) * itemsPerPage
+  const totalPages = Math.ceil(filteredPosts.length / itemsPerPage)
+  const startIndex = (currentPage - 1) * itemsPerPage
 
-  const endIndex =startIndex + itemsPerPage
+  const endIndex = startIndex + itemsPerPage
 
-  const currentPosts = filteredPosts.slice(startIndex,endIndex)
-  const pageNumbers = Array.from({length:totalPages},(_,i)=>i+1)
+  const currentPosts = filteredPosts.slice(startIndex, endIndex)
+  const isEmpty = filteredPosts.length === 0
+  const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1)
 
-
-  const handlePrevPage =()=>{
-    setCurrentPage((prev)=>Math.max(prev-1,1))
+  const handlePrevPage = () => {
+    setCurrentPage((prev) => Math.max(prev - 1, 1))
   }
-  const handleNextPage =()=>{
-    setCurrentPage((prev)=>Math.max(prev+1,totalPages))
+  const handleNextPage = () => {
+    setCurrentPage((prev) => Math.max(prev + 1, totalPages))
   }
-  const handlePageClick =(page)=>{
+  const handlePageClick = (page) => {
     setCurrentPage(page)
   }
 
-
-
   const handleCreatePost = () => {
-    console.log('새로운 FIGHTER 작성')
-    navigate('/app/posts/new')
+    console.log("새로운 FIGHTER 작성")
+    navigate("/app/posts/new")
   }
 
   return (
-    <section className='page post-section post-all'>
+    <section className="page post-section post-all">
       <div className="inner">
         <PostHeader
           onClick={handleCreatePost}
-          title='전체 FIGHTER'
+          title="전체 FIGHTER"
           showButton
           buttonText="새로운 FIGHTER 기록"
           buttonClass="primary"
@@ -105,7 +105,6 @@ const PostAll = () => {
           />
         </div>
         <div className="tags-wrapper">
-
           {/* <TagFilterBar
             tags={tags}
             selectedTag={selectedTag}
@@ -113,29 +112,40 @@ const PostAll = () => {
           /> */}
           <Button text="전체 FIGHTER 보기" className="wh" />
         </div>
-        <PostList posts={currentPosts} />
+        {isEmpty ? (
+          <EmptyFighters
+            buttonText="새로운 FIGHTER 기록"
+            onClick={handleCreatePost}
+          />
+        ) : (
+          <PostList posts={currentPosts} />
+        )}
 
-        <div className="btn-wrap">
-          <Button 
-          onClick={handlePrevPage}
-          text="<" 
-          disabled ={currentPage==1}
-          className="bl"/>
-          <ul>
-            {pageNumbers.map((page)=>(
-              <li 
-              key={page} 
-              onClick={()=>handlePageClick(page)}
-              >{page}</li>
+        {!isEmpty && (
+          <div className="btn-wrap">
+            <Button
+              onClick={handlePrevPage}
+              text="<"
+              disabled={currentPage === 1}
+              className="bl"
+            />
 
-            ))}
-          </ul>
-          <Button 
-          disabled ={currentPage==totalPages || totalPages==0}
+            <ul>
+              {pageNumbers.map((page) => (
+                <li key={page} onClick={() => handlePageClick(page)}>
+                  {page}
+                </li>
+              ))}
+            </ul>
 
-          onClick={handleNextPage}
-          text=">" className="bl"/>
-        </div>
+            <Button
+              disabled={currentPage === totalPages || totalPages === 0}
+              onClick={handleNextPage}
+              text=">"
+              className="bl"
+            />
+          </div>
+        )}
       </div>
     </section>
   )

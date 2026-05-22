@@ -3,6 +3,7 @@ import PostList from "@/components/posts/PostList"
 import TagFilterBar from "@/components/posts/TagFilterBar"
 import Button from "@/components/ui/Button"
 import Input from "@/components/ui/Input"
+import EmptyFighters from "@/components/posts/EmptyFighters"
 import { useState, useEffect } from "react"
 import "./PostPagesAll.scss"
 import { getPosts } from "@/api/post.api"
@@ -45,54 +46,61 @@ const PostDashboard = () => {
           ...new Set(mappedPosts.flatMap((post) => post.tags || [])),
         ]
 
-                setPosts(mappedPosts)
-            } catch (error) {
-                setFetchError(error?.response?.data?.message || error.message || 'FIGHTER 조회 실패')
-                setPosts([])
-            }
-
-        }
-        fetchPosts()
-    }, [])
-
-
-
-
-    const filteredPosts = useFilteredPosts(posts,selectedTag,searchKeyword)
-    const handleCreatePost = () => {
-        console.log('새 FIGHTER 작성')
-        navigate('/app/posts/new')
+        setPosts(mappedPosts)
+      } catch (error) {
+        setFetchError(
+          error?.response?.data?.message ||
+            error.message ||
+            "FIGHTER 조회 실패",
+        )
+        setPosts([])
+      }
     }
-    return (
-        <section className='page post-section'>
-            <div className="inner">
-                <PostHeader
-                    onClick={handleCreatePost}
-                    title='당신의 FIGHTER를 기록하세요'
-                    showButton
-                    buttonText="FIGHTER 기록"
-                    buttonClass="primary"
-                />
-                <div className="input-post">
-                    <Input
-                        placeholder="기록된 선수를 검색하세요!"
-                        value={searchKeyword}
-                        onChange={(e) => setSearchKeyword(e.target.value)}
-                    />
-                </div>
-                <div className="tags-wrapper">
+    fetchPosts()
+  }, [])
 
-                    {/* <TagFilterBar
+  const filteredPosts = useFilteredPosts(posts, selectedTag, searchKeyword)
+  const handleCreatePost = () => {
+    console.log("새 FIGHTER 작성")
+    navigate("/app/posts/new")
+  }
+
+  const visiblePosts = filteredPosts.slice(0, 3)
+  const isEmpty = visiblePosts.length === 0
+
+  return (
+    <section className="page post-section">
+      <div className="inner">
+        <PostHeader
+          onClick={handleCreatePost}
+          title="당신의 FIGHTER를 기록하세요"
+          showButton
+          buttonText="FIGHTER 기록"
+          buttonClass="primary"
+        />
+        <div className="input-post">
+          <Input
+            placeholder="기록된 선수를 검색하세요!"
+            value={searchKeyword}
+            onChange={(e) => setSearchKeyword(e.target.value)}
+          />
+        </div>
+        <div className="tags-wrapper">
+          {/* <TagFilterBar
                         tags={tags}
                         selectedTag={selectedTag}
                         onChangeTag={setSelectedTag}
                     /> */}
-                    <Button text="전체 FIGHTER 보기" className="wh" />
-                </div>
-                <PostList posts={filteredPosts.slice(0,3)} />
-            </div>
-        </section>
-    )
+          <Button text="전체 FIGHTER 보기" className="wh" />
+        </div>
+        {isEmpty ? (
+          <EmptyFighters buttonText="FIGHTER 기록" onClick={handleCreatePost} />
+        ) : (
+          <PostList posts={visiblePosts} />
+        )}
+      </div>
+    </section>
+  )
 }
 
 export default PostDashboard
