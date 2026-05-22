@@ -1,2 +1,2 @@
 # Octalog
-fullstack 페이지 작업
+fullstack 프로젝트입니다.
